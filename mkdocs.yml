@@ -1,0 +1,7 @@
+site_name: 我的个人博客
+site_author: 你的姓名
+theme:
+  name: material
+nav:
+  - 首页: index.md
+  - 第一篇博客: first-post.md
