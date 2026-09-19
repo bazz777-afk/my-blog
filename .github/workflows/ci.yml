@@ -1,0 +1,39 @@
+name: PR 校验（严格构建）
+
+# PR 阶段只校验"能不能构建成功"，不做任何部署。
+# 部署仍然只由 deploy.yml 在代码合并进 main 之后执行。
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "requirements.txt"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "ci-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取仓库代码
+        uses: actions/checkout@v4
+
+      - name: 配置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 严格构建（坏链接、nav 指向缺失文件会直接失败）
+        run: mkdocs build --strict
