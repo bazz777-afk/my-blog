@@ -1,7 +1,32 @@
 site_name: 我的个人博客
-site_author: 你的姓名
+site_author: bazz777-afk
+site_description: 记录开源软件开发课程的学习实践、技术笔记与踩坑记录
+site_url: https://bazz777-afk.github.io/my-blog/
+repo_url: https://github.com/bazz777-afk/my-blog
+repo_name: bazz777-afk/my-blog
+edit_uri: edit/main/docs/
+
 theme:
   name: material
+  language: zh
+  features:
+    - navigation.instant
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
 nav:
   - 首页: index.md
   - 第一篇博客: first-post.md
